@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:ticketing_app/views/Struk.dart';
+import 'package:ticketing_app/services/firebase.dart';
 
 // import 'package:ticketing_app/services/firebase.dart';
 
@@ -27,6 +28,7 @@ class PembayaranPage extends StatefulWidget {
 }
 
 class _PembayaranPageState extends State<PembayaranPage> {
+  final fireStoreService = FireStoreService(); // ✅ Tambahkan ini kalau belum
   void openCashAlertBox(String tiketId) {
     showDialog(
         context: context,
@@ -81,7 +83,16 @@ class _PembayaranPageState extends State<PembayaranPage> {
                       ),
                       SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          // Tambahkan pembelian
+                          await fireStoreService.addPembelian({
+                            'tiketId': tiketId,
+                            'name': widget.name,
+                            'jenis_tiket': widget.jenisTiket,
+                            'Harga': widget.harga,
+                            'Metode_Pembayaran': 'Cash',
+                            'created_at': FieldValue.serverTimestamp()
+                          });
                           Navigator.push(context, MaterialPageRoute(builder: (context) => StrukPage(tiketId: tiketId, name: widget.name, jenisTiket: widget.jenisTiket, harga: widget.harga, tanggal: widget.tanggal,)));
                         },
                         child: Text(
@@ -187,7 +198,16 @@ class _PembayaranPageState extends State<PembayaranPage> {
                       ),
                       SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          // Tambahkan pembelian
+                          await fireStoreService.addPembelian({
+                            'tiketId': tiketId,
+                            'name': widget.name,
+                            'jenis_tiket': widget.jenisTiket,
+                            'Harga': widget.harga,
+                            'Metode_Pembayaran': 'Kartu Kredit',
+                            'created_at': FieldValue.serverTimestamp()
+                          });
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -268,7 +288,17 @@ class _PembayaranPageState extends State<PembayaranPage> {
                       ),
                       SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          // Tambahkan pembelian
+                          await fireStoreService.addPembelian({
+                            'tiketId': tiketId,
+                            'name': widget.name,
+                            'jenis_tiket': widget.jenisTiket,
+                            'Harga': widget.harga,
+                            'Metode_Pembayaran': 'QRIS',
+                            'created_at': FieldValue.serverTimestamp()
+                          });
+                          
                             Navigator.push(
                               context,
                               MaterialPageRoute(

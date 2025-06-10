@@ -62,7 +62,7 @@ class _StrukPageState extends State<StrukPage> {
                   ),
                 ),
                 pw.SizedBox(height: 20),
-                pw.Text('Nama: ${widget.name}'),
+                pw.Text('N ama: ${widget.name}'),
                 pw.Text('Jenis Tiket: ${widget.jenisTiket}'),
                 pw.Text('Harga: Rp ${widget.harga}'),
                 pw.Text(
